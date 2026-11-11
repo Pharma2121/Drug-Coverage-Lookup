@@ -1,0 +1,59 @@
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Drug Coverage Lookup</h1>
+      <p class="subtitle" id="subtitle">Medicare Part D and Part B, NY Medicaid, Healthfirst and MetroPlus</p>
+    </div>
+    <div class="year" role="group" aria-label="Plan year">
+      <span>Plan year</span>
+      <button type="button" data-year="2026" aria-pressed="false">2026</button>
+      <button type="button" data-year="2027" aria-pressed="false">2027</button>
+    </div>
+  </header>
+
+  <div class="search-row">
+    <div class="col" id="dc">
+      <label for="di">Drug (brand, generic or HCPCS)</label>
+      <input id="di" autocomplete="off" placeholder="e.g. Eliquis, insulin glargine, J1745">
+      <div class="match-list" id="dd"></div>
+      <div class="tag-area" id="dt"></div>
+    </div>
+    <div class="col" id="pc">
+      <label for="pi">Health plan or insurer</label>
+      <input id="pi" autocomplete="off" placeholder="e.g. Healthfirst, Humana, H3359">
+      <div class="match-list" id="pd"></div>
+      <div class="tag-area" id="pt"></div>
+    </div>
+    <div class="col">
+      <label for="sf">State</label>
+      <select id="sf"><option value="">Add a state</option></select>
+      <div class="tag-area" id="stags"></div>
+    </div>
+    <div class="col">
+      <label for="mf">Medicare plan type</label>
+      <select id="mf"><option value="">Add a type</option></select>
+      <div class="tag-area" id="mtags"></div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button type="button" class="btn primary" data-act="search">Search</button>
+    <button type="button" class="btn" data-act="clear">Clear</button>
+    <div class="summary" id="summary"></div>
+  </div>
+  <div class="status" id="status" role="status">Loading drug and coverage data…</div>
+
+  <div id="covpanel"></div>
+  <div class="results-wrap"><div id="results"><div class="empty">Loading…</div></div></div>
+
+  <details class="about">
+    <summary>Data sources and dates</summary>
+    <div class="src-wrap" id="sources"></div>
+    <ul>
+      <li>Absence from the Medicare Part B Payment Limit File is not a coverage determination. The local MAC decides.</li>
+      <li>NYRx governs the pharmacy benefit for mainstream Medicaid managed care, HARP and HIV-SNP. It does not apply to Essential Plan, Child Health Plus or MLTC/MAP/PACE.</li>
+      <li>Healthfirst and MetroPlus marketplace lists are read from the plans' published PDFs and matched to drugs by name, form and strength. Treat them as a pointer and confirm in the plan document.</li>
+      <li>Cost-share dollar estimates use the median plan-reported unit price and a 30-day quantity. They are not a quote.</li>
+    </ul>
+    <p class="foot"><span id="built"></span> Not medical or billing advice. Confirm coverage with the plan or payer before relying on it.</p>
+  </details>
+</div>
