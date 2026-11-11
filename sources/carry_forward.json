@@ -1,0 +1,813 @@
+{
+ "_note": "Curated values carried from the previous build: names for RxCUIs CMS no longer lists in a Formulary Reference File, brand and generic labels for biosimilar Q-codes, and hand-verified coverage overrides.",
+ "D": {
+  "1601394": {
+   "b": "IBRANCE",
+   "d": "PALBOCICLIB 75 MG ORAL CAPSULE [IBRANCE]",
+   "s": "PALBOCICLIB 75 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "1601386": {
+   "b": "IBRANCE",
+   "d": "PALBOCICLIB 100 MG ORAL CAPSULE [IBRANCE]",
+   "s": "PALBOCICLIB 100 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "2058922": {
+   "b": "VIZIMPRO",
+   "d": "DACOMITINIB 15 MG ORAL TABLET [VIZIMPRO]",
+   "s": "DACOMITINIB 15 MG",
+   "f": "ORAL TABLET"
+  },
+  "2058926": {
+   "b": "VIZIMPRO",
+   "d": "DACOMITINIB 30 MG ORAL TABLET [VIZIMPRO]",
+   "s": "DACOMITINIB 30 MG",
+   "f": "ORAL TABLET"
+  },
+  "2058932": {
+   "b": "VIZIMPRO",
+   "d": "DACOMITINIB 45 MG ORAL TABLET [VIZIMPRO]",
+   "s": "DACOMITINIB 45 MG",
+   "f": "ORAL TABLET"
+  },
+  "1926069": {
+   "b": "NORVIR",
+   "d": "RITONAVIR 100 MG ORAL POWDER [NORVIR]",
+   "s": "RITONAVIR 100 MG",
+   "f": "ORAL POWDER"
+  },
+  "847749": {
+   "b": "KALETRA",
+   "d": "LOPINAVIR 80 MG/ML / RITONAVIR 20 MG/ML ORAL SOLUTION [KALETRA]",
+   "s": "LOPINAVIR 80 MG/ML / RITONAVIR 20 MG/ML",
+   "f": "ORAL SOLUTION"
+  },
+  "1923056": {
+   "b": "KISQALI FEMARA CO-PACK 400",
+   "d": "{28 (LETROZOLE 2.5 MG ORAL TABLET [FEMARA]) / 42 (RIBOCICLIB 200 MG ORAL TABLET [KISQALI]) } PACK [KISQALI FEMARA CO-PACK 400]",
+   "s": "LETROZOLE 2.5 MG / RIBOCICLIB 200 MG",
+   "f": "PACK"
+  },
+  "1923058": {
+   "b": "KISQALI FEMARA CO-PACK 600",
+   "d": "{28 (LETROZOLE 2.5 MG ORAL TABLET [FEMARA]) / 63 (RIBOCICLIB 200 MG ORAL TABLET [KISQALI]) } PACK [KISQALI FEMARA CO-PACK 600]",
+   "s": "LETROZOLE 2.5 MG / RIBOCICLIB 200 MG",
+   "f": "PACK"
+  },
+  "2200654": {
+   "b": "RYBELSUS",
+   "d": "SEMAGLUTIDE 3 MG ORAL TABLET [RYBELSUS]",
+   "s": "SEMAGLUTIDE 3 MG",
+   "f": "ORAL TABLET"
+  },
+  "2200658": {
+   "b": "RYBELSUS",
+   "d": "SEMAGLUTIDE 7 MG ORAL TABLET [RYBELSUS]",
+   "s": "SEMAGLUTIDE 7 MG",
+   "f": "ORAL TABLET"
+  },
+  "2200650": {
+   "b": "RYBELSUS",
+   "d": "SEMAGLUTIDE 14 MG ORAL TABLET [RYBELSUS]",
+   "s": "SEMAGLUTIDE 14 MG",
+   "f": "ORAL TABLET"
+  },
+  "748878": {
+   "b": "",
+   "d": "{21 (ETHINYL ESTRADIOL 0.03 MG / LEVONORGESTREL 0.15 MG ORAL TABLET) / 7 (INERT INGREDIENTS 1 MG ORAL TABLET) } PACK",
+   "s": "ETHINYL ESTRADIOL 0.03 MG / INERT INGREDIENTS 1 MG / LEVONORGESTREL 0.15 MG",
+   "f": "PACK"
+  },
+  "308508": {
+   "b": "",
+   "d": "BACITRACIN 0.5 UNT/MG OPHTHALMIC OINTMENT",
+   "s": "BACITRACIN 0.5 UNT/MG",
+   "f": "OPHTHALMIC OINTMENT"
+  },
+  "996572": {
+   "b": "",
+   "d": "{21 (MEMANTINE HYDROCHLORIDE 10 MG ORAL TABLET) / 28 (MEMANTINE HYDROCHLORIDE 5 MG ORAL TABLET) } PACK",
+   "s": "MEMANTINE HYDROCHLORIDE 10 MG / MEMANTINE HYDROCHLORIDE 5 MG",
+   "f": "PACK"
+  },
+  "807225": {
+   "b": "TYPHIM VI",
+   "d": "TYPHOID VI POLYSACCHARIDE VACCINE, S TYPHI TY2 STRAIN 0.05 MG/ML INJECTABLE SOLUTION [TYPHIM VI]",
+   "s": "TYPHOID VI POLYSACCHARIDE VACCINE, S TYPHI TY2 STRAIN 0.05 MG/ML",
+   "f": "INJECTABLE SOLUTION"
+  },
+  "1292828": {
+   "b": "YF-VAX",
+   "d": "YELLOW FEVER VIRUS STRAIN 17D-204 LIVE ANTIGEN 4000 UNT/ML INJECTABLE SUSPENSION [YF-VAX]",
+   "s": "YELLOW FEVER VIRUS STRAIN 17D-204 LIVE ANTIGEN 4000 UNT/ML",
+   "f": "INJECTABLE SUSPENSION"
+  },
+  "1857925": {
+   "b": "SELZENTRY",
+   "d": "MARAVIROC 20 MG/ML ORAL SOLUTION [SELZENTRY]",
+   "s": "MARAVIROC 20 MG/ML",
+   "f": "ORAL SOLUTION"
+  },
+  "1300378": {
+   "b": "BOOSTRIX",
+   "d": "0.5 ML BORDETELLA PERTUSSIS FILAMENTOUS HEMAGGLUTININ VACCINE, INACTIVATED 0.016 MG/ML / BORDETELLA PERTUSSIS PERTACTIN VACCINE, INACTIVATED 0.005 UNT/ML / BORDETELLA PERTUSSIS TOXOID VACCINE, INACTIVATED 0.016 MG/ML / DIPHTHERIA TOXOID VACCINE, INACTIVATED 5 UNT/ML / TETANUS TOXOID VACCINE, INACTIVATED 10 UNT/ML INJECTION [BOOSTRIX]",
+   "s": "BORDETELLA PERTUSSIS FILAMENTOUS HEMAGGLUTININ VACCINE, INACTIVATED 0.016 MG/ML / BORDETELLA PERTUSSIS PERTACTIN VACCINE, INACTIVATED 0.005 UNT/ML / BORDETELLA PERTUSSIS TOXOID VACCINE, INACTIVATED 0.016 MG/ML / DIPHTHERIA TOXOID VACCINE, INACTIVATED",
+   "f": "INJECTION"
+  },
+  "1551999": {
+   "b": "TYBOST",
+   "d": "COBICISTAT 150 MG ORAL TABLET [TYBOST]",
+   "s": "COBICISTAT 150 MG",
+   "f": "ORAL TABLET"
+  },
+  "1544471": {
+   "b": "ZYDELIG",
+   "d": "IDELALISIB 100 MG ORAL TABLET [ZYDELIG]",
+   "s": "IDELALISIB 100 MG",
+   "f": "ORAL TABLET"
+  },
+  "1544475": {
+   "b": "ZYDELIG",
+   "d": "IDELALISIB 150 MG ORAL TABLET [ZYDELIG]",
+   "s": "IDELALISIB 150 MG",
+   "f": "ORAL TABLET"
+  },
+  "207249": {
+   "b": "OXISTAT",
+   "d": "OXICONAZOLE 10 MG/ML TOPICAL LOTION [OXISTAT]",
+   "s": "OXICONAZOLE 10 MG/ML",
+   "f": "TOPICAL LOTION"
+  },
+  "2274390": {
+   "b": "TAZVERIK",
+   "d": "TAZEMETOSTAT 200 MG ORAL TABLET [TAZVERIK]",
+   "s": "TAZEMETOSTAT 200 MG",
+   "f": "ORAL TABLET"
+  },
+  "198049": {
+   "b": "",
+   "d": "OFLOXACIN 300 MG ORAL TABLET",
+   "s": "OFLOXACIN 300 MG",
+   "f": "ORAL TABLET"
+  },
+  "351859": {
+   "b": "HUMULIN R",
+   "d": "INSULIN, REGULAR, HUMAN 500 UNT/ML INJECTABLE SOLUTION [HUMULIN R]",
+   "s": "INSULIN, REGULAR, HUMAN 500 UNT/ML",
+   "f": "INJECTABLE SOLUTION"
+  },
+  "2535249": {
+   "b": "ZEGALOGUE",
+   "d": "0.6 ML DASIGLUCAGON 1 MG/ML AUTO-INJECTOR [ZEGALOGUE]",
+   "s": "DASIGLUCAGON 1 MG/ML",
+   "f": "AUTO-INJECTOR"
+  },
+  "2535243": {
+   "b": "ZEGALOGUE",
+   "d": "0.6 ML DASIGLUCAGON 1 MG/ML PREFILLED SYRINGE [ZEGALOGUE]",
+   "s": "DASIGLUCAGON 1 MG/ML",
+   "f": "PREFILLED SYRINGE"
+  },
+  "834350": {
+   "b": "PACERONE",
+   "d": "AMIODARONE HYDROCHLORIDE 400 MG ORAL TABLET [PACERONE]",
+   "s": "AMIODARONE HYDROCHLORIDE 400 MG",
+   "f": "ORAL TABLET"
+  },
+  "608624": {
+   "b": "",
+   "d": "METOCLOPRAMIDE 5 MG DISINTEGRATING ORAL TABLET",
+   "s": "METOCLOPRAMIDE 5 MG",
+   "f": "DISINTEGRATING ORAL TABLET"
+  },
+  "2678310": {
+   "b": "TRIDACAINE",
+   "d": "LIDOCAINE 0.05 MG/MG MEDICATED PATCH [TRIDACAINE]",
+   "s": "LIDOCAINE 0.05 MG/MG",
+   "f": "MEDICATED PATCH"
+  },
+  "2680741": {
+   "b": "REXTOVY",
+   "d": "NALOXONE HYDROCHLORIDE 16 MG/ML NASAL SPRAY [REXTOVY]",
+   "s": "NALOXONE HYDROCHLORIDE 16 MG/ML",
+   "f": "NASAL SPRAY"
+  },
+  "902648": {
+   "b": "NORPACE",
+   "d": "12 HR DISOPYRAMIDE 100 MG EXTENDED RELEASE ORAL CAPSULE [NORPACE]",
+   "s": "DISOPYRAMIDE 100 MG",
+   "f": "EXTENDED RELEASE ORAL CAPSULE"
+  },
+  "902652": {
+   "b": "NORPACE",
+   "d": "12 HR DISOPYRAMIDE 150 MG EXTENDED RELEASE ORAL CAPSULE [NORPACE]",
+   "s": "DISOPYRAMIDE 150 MG",
+   "f": "EXTENDED RELEASE ORAL CAPSULE"
+  },
+  "2001565": {
+   "b": "",
+   "d": "BX RATING 24 HR METHYLPHENIDATE HYDROCHLORIDE 27 MG EXTENDED RELEASE ORAL TABLET",
+   "s": "METHYLPHENIDATE HYDROCHLORIDE 27 MG",
+   "f": "EXTENDED RELEASE ORAL TABLET"
+  },
+  "2001566": {
+   "b": "",
+   "d": "BX RATING 24 HR METHYLPHENIDATE HYDROCHLORIDE 36 MG EXTENDED RELEASE ORAL TABLET",
+   "s": "METHYLPHENIDATE HYDROCHLORIDE 36 MG",
+   "f": "EXTENDED RELEASE ORAL TABLET"
+  },
+  "2001568": {
+   "b": "",
+   "d": "BX RATING 24 HR METHYLPHENIDATE HYDROCHLORIDE 54 MG EXTENDED RELEASE ORAL TABLET",
+   "s": "METHYLPHENIDATE HYDROCHLORIDE 54 MG",
+   "f": "EXTENDED RELEASE ORAL TABLET"
+  },
+  "2045245": {
+   "b": "PLENVU",
+   "d": "{1 (ASCORBIC ACID 7540 MG / POLYETHYLENE GLYCOL 3350 40000 MG / POTASSIUM CHLORIDE 1200 MG / SODIUM ASCORBATE 48110 MG / SODIUM CHLORIDE 3200 MG POWDER FOR ORAL SOLUTION) / 1 (POLYETHYLENE GLYCOL 3350 100000 MG / POTASSIUM CHLORIDE 1000 MG / SODIUM CHLORIDE 2000 MG / SODIUM SULFATE 9000 MG POWDER FOR ORAL SOLUTION) } PACK [PLENVU]",
+   "s": "ASCORBIC ACID 7540 MG / POLYETHYLENE GLYCOL 3350 100000 MG / POLYETHYLENE GLYCOL 3350 40000 MG / POTASSIUM CHLORIDE 1000 MG / POTASSIUM CHLORIDE 1200 MG",
+   "f": "PACK"
+  },
+  "2055676": {
+   "b": "PERSERIS",
+   "d": "0.6 ML RISPERIDONE 150 MG/ML PREFILLED SYRINGE [PERSERIS]",
+   "s": "RISPERIDONE 150 MG/ML",
+   "f": "PREFILLED SYRINGE"
+  },
+  "2055672": {
+   "b": "PERSERIS",
+   "d": "0.8 ML RISPERIDONE 150 MG/ML PREFILLED SYRINGE [PERSERIS]",
+   "s": "RISPERIDONE 150 MG/ML",
+   "f": "PREFILLED SYRINGE"
+  },
+  "2663978": {
+   "b": "SOHONOS",
+   "d": "PALOVAROTENE 2.5 MG ORAL CAPSULE [SOHONOS]",
+   "s": "PALOVAROTENE 2.5 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "829539": {
+   "b": "",
+   "d": "ADAPALENE 0.001 MG/MG / BENZOYL PEROXIDE 0.025 MG/MG TOPICAL GEL",
+   "s": "ADAPALENE 0.001 MG/MG / BENZOYL PEROXIDE 0.025 MG/MG",
+   "f": "TOPICAL GEL"
+  },
+  "2049558": {
+   "b": "ZEMDRI",
+   "d": "10 ML PLAZOMICIN 50 MG/ML INJECTION [ZEMDRI]",
+   "s": "PLAZOMICIN 50 MG/ML",
+   "f": "INJECTION"
+  },
+  "2606516": {
+   "b": "",
+   "d": "LEUPROLIDE ACETATE 22.5 MG INJECTION",
+   "s": "LEUPROLIDE ACETATE 22.5 MG",
+   "f": "INJECTION"
+  },
+  "1483677": {
+   "b": "",
+   "d": "ZOLMITRIPTAN 2.5 MG/ACTUAT NASAL SPRAY",
+   "s": "ZOLMITRIPTAN 2.5 MG/ACTUAT",
+   "f": "NASAL SPRAY"
+  },
+  "2668484": {
+   "b": "YUFLYMA",
+   "d": "0.2 ML ADALIMUMAB-AATY 100 MG/ML PREFILLED SYRINGE [YUFLYMA]",
+   "s": "ADALIMUMAB-AATY 100 MG/ML",
+   "f": "PREFILLED SYRINGE"
+  },
+  "213729": {
+   "b": "BETOPTIC S",
+   "d": "BETAXOLOL 2.5 MG/ML OPHTHALMIC SUSPENSION [BETOPTIC S]",
+   "s": "BETAXOLOL 2.5 MG/ML",
+   "f": "OPHTHALMIC SUSPENSION"
+  },
+  "2385353": {
+   "b": "PHEXXI",
+   "d": "CITRIC ACID 0.01 MG/MG / LACTIC ACID 0.018 MG/MG / POTASSIUM BITARTRATE 0.004 MG/MG VAGINAL GEL [PHEXXI]",
+   "s": "CITRIC ACID 0.01 MG/MG / LACTIC ACID 0.018 MG/MG / POTASSIUM BITARTRATE 0.004 MG/MG",
+   "f": "VAGINAL GEL"
+  },
+  "2055650": {
+   "b": "TAKHZYRO",
+   "d": "2 ML LANADELUMAB-FLYO 150 MG/ML INJECTION [TAKHZYRO]",
+   "s": "LANADELUMAB-FLYO 150 MG/ML",
+   "f": "INJECTION"
+  },
+  "847915": {
+   "b": "",
+   "d": "60 ACTUAT EXENATIDE 0.005 MG/ACTUAT PEN INJECTOR",
+   "s": "EXENATIDE 0.005 MG/ACTUAT",
+   "f": "PEN INJECTOR"
+  },
+  "847910": {
+   "b": "",
+   "d": "60 ACTUAT EXENATIDE 0.01 MG/ACTUAT PEN INJECTOR",
+   "s": "EXENATIDE 0.01 MG/ACTUAT",
+   "f": "PEN INJECTOR"
+  },
+  "2055286": {
+   "b": "INVELTYS",
+   "d": "LOTEPREDNOL ETABONATE 10 MG/ML OPHTHALMIC SUSPENSION [INVELTYS]",
+   "s": "LOTEPREDNOL ETABONATE 10 MG/ML",
+   "f": "OPHTHALMIC SUSPENSION"
+  },
+  "1923338": {
+   "b": "KEVZARA",
+   "d": "1.14 ML SARILUMAB 132 MG/ML PREFILLED SYRINGE [KEVZARA]",
+   "s": "SARILUMAB 132 MG/ML",
+   "f": "PREFILLED SYRINGE"
+  },
+  "892345": {
+   "b": "",
+   "d": "MORPHINE SULFATE 30 MG EXTENDED RELEASE ORAL CAPSULE",
+   "s": "MORPHINE SULFATE 30 MG",
+   "f": "EXTENDED RELEASE ORAL CAPSULE"
+  },
+  "2701401": {
+   "b": "CRENESSITY",
+   "d": "CRINECERFONT 25 MG ORAL CAPSULE [CRENESSITY]",
+   "s": "CRINECERFONT 25 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "1114470": {
+   "b": "RECTIV",
+   "d": "NITROGLYCERIN 0.004 MG/MG RECTAL OINTMENT [RECTIV]",
+   "s": "NITROGLYCERIN 0.004 MG/MG",
+   "f": "RECTAL OINTMENT"
+  },
+  "1664984": {
+   "b": "AZACTAM",
+   "d": "AZTREONAM 1000 MG INJECTION [AZACTAM]",
+   "s": "AZTREONAM 1000 MG",
+   "f": "INJECTION"
+  },
+  "748746": {
+   "b": "CLEOCIN",
+   "d": "CLINDAMYCIN 150 MG ORAL CAPSULE [CLEOCIN]",
+   "s": "CLINDAMYCIN 150 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "748750": {
+   "b": "CLEOCIN",
+   "d": "CLINDAMYCIN 75 MG ORAL CAPSULE [CLEOCIN]",
+   "s": "CLINDAMYCIN 75 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "748748": {
+   "b": "CLEOCIN",
+   "d": "CLINDAMYCIN 300 MG ORAL CAPSULE [CLEOCIN]",
+   "s": "CLINDAMYCIN 300 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "1737582": {
+   "b": "CLEOCIN",
+   "d": "6 ML CLINDAMYCIN 150 MG/ML INJECTION [CLEOCIN]",
+   "s": "CLINDAMYCIN 150 MG/ML",
+   "f": "INJECTION"
+  },
+  "226827": {
+   "b": "ZITHROMAX",
+   "d": "AZITHROMYCIN 500 MG ORAL TABLET [ZITHROMAX]",
+   "s": "AZITHROMYCIN 500 MG",
+   "f": "ORAL TABLET"
+  },
+  "1668240": {
+   "b": "ZITHROMAX",
+   "d": "AZITHROMYCIN 500 MG INJECTION [ZITHROMAX]",
+   "s": "AZITHROMYCIN 500 MG",
+   "f": "INJECTION"
+  },
+  "212446": {
+   "b": "ZITHROMAX",
+   "d": "AZITHROMYCIN 250 MG ORAL TABLET [ZITHROMAX]",
+   "s": "AZITHROMYCIN 250 MG",
+   "f": "ORAL TABLET"
+  },
+  "847745": {
+   "b": "KALETRA",
+   "d": "LOPINAVIR 100 MG / RITONAVIR 25 MG ORAL TABLET [KALETRA]",
+   "s": "LOPINAVIR 100 MG / RITONAVIR 25 MG",
+   "f": "ORAL TABLET"
+  },
+  "847741": {
+   "b": "KALETRA",
+   "d": "LOPINAVIR 200 MG / RITONAVIR 50 MG ORAL TABLET [KALETRA]",
+   "s": "LOPINAVIR 200 MG / RITONAVIR 50 MG",
+   "f": "ORAL TABLET"
+  },
+  "211666": {
+   "b": "METROCREAM",
+   "d": "METRONIDAZOLE 7.5 MG/ML TOPICAL CREAM [METROCREAM]",
+   "s": "METRONIDAZOLE 7.5 MG/ML",
+   "f": "TOPICAL CREAM"
+  },
+  "616485": {
+   "b": "SEROQUEL",
+   "d": "QUETIAPINE 400 MG ORAL TABLET [SEROQUEL]",
+   "s": "QUETIAPINE 400 MG",
+   "f": "ORAL TABLET"
+  },
+  "104849": {
+   "b": "PROZAC",
+   "d": "FLUOXETINE 20 MG ORAL CAPSULE [PROZAC]",
+   "s": "FLUOXETINE 20 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "746030": {
+   "b": "TENORETIC",
+   "d": "ATENOLOL 50 MG / CHLORTHALIDONE 25 MG ORAL TABLET [TENORETIC]",
+   "s": "ATENOLOL 50 MG / CHLORTHALIDONE 25 MG",
+   "f": "ORAL TABLET"
+  },
+  "746023": {
+   "b": "TENORETIC",
+   "d": "ATENOLOL 100 MG / CHLORTHALIDONE 25 MG ORAL TABLET [TENORETIC]",
+   "s": "ATENOLOL 100 MG / CHLORTHALIDONE 25 MG",
+   "f": "ORAL TABLET"
+  },
+  "1099290": {
+   "b": "NORPRAMIN",
+   "d": "DESIPRAMINE HYDROCHLORIDE 10 MG ORAL TABLET [NORPRAMIN]",
+   "s": "DESIPRAMINE HYDROCHLORIDE 10 MG",
+   "f": "ORAL TABLET"
+  },
+  "1099302": {
+   "b": "NORPRAMIN",
+   "d": "DESIPRAMINE HYDROCHLORIDE 25 MG ORAL TABLET [NORPRAMIN]",
+   "s": "DESIPRAMINE HYDROCHLORIDE 25 MG",
+   "f": "ORAL TABLET"
+  },
+  "402106": {
+   "b": "INSPRA",
+   "d": "EPLERENONE 25 MG ORAL TABLET [INSPRA]",
+   "s": "EPLERENONE 25 MG",
+   "f": "ORAL TABLET"
+  },
+  "402105": {
+   "b": "INSPRA",
+   "d": "EPLERENONE 50 MG ORAL TABLET [INSPRA]",
+   "s": "EPLERENONE 50 MG",
+   "f": "ORAL TABLET"
+  },
+  "208094": {
+   "b": "CARAFATE",
+   "d": "SUCRALFATE 100 MG/ML ORAL SUSPENSION [CARAFATE]",
+   "s": "SUCRALFATE 100 MG/ML",
+   "f": "ORAL SUSPENSION"
+  },
+  "758555": {
+   "b": "INTELENCE",
+   "d": "ETRAVIRINE 100 MG ORAL TABLET [INTELENCE]",
+   "s": "ETRAVIRINE 100 MG",
+   "f": "ORAL TABLET"
+  },
+  "404406": {
+   "b": "SINGULAIR",
+   "d": "MONTELUKAST 4 MG ORAL GRANULES [SINGULAIR]",
+   "s": "MONTELUKAST 4 MG",
+   "f": "ORAL GRANULES"
+  },
+  "1726216": {
+   "b": "PRIMAXIN",
+   "d": "CILASTATIN 500 MG / IMIPENEM 500 MG INJECTION [PRIMAXIN]",
+   "s": "CILASTATIN 500 MG / IMIPENEM 500 MG",
+   "f": "INJECTION"
+  },
+  "2627717": {
+   "b": "AMJEVITA",
+   "d": "0.4 ML ADALIMUMAB-ATTO 50 MG/ML PREFILLED SYRINGE [AMJEVITA]",
+   "s": "ADALIMUMAB-ATTO 50 MG/ML",
+   "f": "PREFILLED SYRINGE"
+  },
+  "207791": {
+   "b": "MACRODANTIN",
+   "d": "NITROFURANTOIN, MACROCRYSTALS 25 MG ORAL CAPSULE [MACRODANTIN]",
+   "s": "NITROFURANTOIN, MACROCRYSTALS 25 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "201882": {
+   "b": "MACRODANTIN",
+   "d": "NITROFURANTOIN, MACROCRYSTALS 50 MG ORAL CAPSULE [MACRODANTIN]",
+   "s": "NITROFURANTOIN, MACROCRYSTALS 50 MG",
+   "f": "ORAL CAPSULE"
+  },
+  "2668410": {
+   "b": "OMVOH",
+   "d": "1 ML MIRIKIZUMAB-MRKZ 100 MG/ML AUTO-INJECTOR [OMVOH]",
+   "s": "MIRIKIZUMAB-MRKZ 100 MG/ML",
+   "f": "AUTO-INJECTOR"
+  },
+  "2680732": {
+   "b": "OMVOH",
+   "d": "1 ML MIRIKIZUMAB-MRKZ 100 MG/ML PREFILLED SYRINGE [OMVOH]",
+   "s": "MIRIKIZUMAB-MRKZ 100 MG/ML",
+   "f": "PREFILLED SYRINGE"
+  },
+  "2626056": {
+   "b": "ERMEZA",
+   "d": "LEVOTHYROXINE SODIUM 0.03 MG/ML ORAL SOLUTION [ERMEZA]",
+   "s": "LEVOTHYROXINE SODIUM 0.03 MG/ML",
+   "f": "ORAL SOLUTION"
+  },
+  "1648160": {
+   "b": "ZOMACTON",
+   "d": "SOMATROPIN 10 MG/ML INJECTABLE SOLUTION [ZOMACTON]",
+   "s": "SOMATROPIN 10 MG/ML",
+   "f": "INJECTABLE SOLUTION"
+  },
+  "2641669": {
+   "b": "HYRIMOZ PEDIATRIC CROHN'S STARTER KIT PATIENT WEIGHT > 40 KG",
+   "d": "{3 (0.8 ML ADALIMUMAB-ADAZ 100 MG/ML PREFILLED SYRINGE [HYRIMOZ]) } PACK [HYRIMOZ PEDIATRIC CROHN'S STARTER KIT PATIENT WEIGHT > 40 KG]",
+   "s": "ADALIMUMAB-ADAZ 100 MG/ML",
+   "f": "PACK"
+  },
+  "2641673": {
+   "b": "HYRIMOZ PEDIATRIC CROHN'S STARTER KIT PATIENT WEIGHT < 40 KG",
+   "d": "{1 (0.4 ML ADALIMUMAB-ADAZ 100 MG/ML PREFILLED SYRINGE [HYRIMOZ]) / 1 (0.8 ML ADALIMUMAB-ADAZ 100 MG/ML PREFILLED SYRINGE [HYRIMOZ]) } PACK [HYRIMOZ PEDIATRIC CROHN'S STARTER KIT PATIENT WEIGHT < 40 KG]",
+   "s": "ADALIMUMAB-ADAZ 100 MG/ML",
+   "f": "PACK"
+  }
+ },
+ "BIOSIM": {
+  "Q5098": {
+   "b": "Imuldosa",
+   "g": "Ustekinumab-srlf"
+  },
+  "Q5099": {
+   "b": "Steqeyma",
+   "g": "Ustekinumab-stba"
+  },
+  "Q5100": {
+   "b": "Yesintek",
+   "g": "Ustekinumab-kfce"
+  },
+  "Q5101": {
+   "b": "Zarxio",
+   "g": "Filgrastim-sndz"
+  },
+  "Q5103": {
+   "b": "Inflectra",
+   "g": "Infliximab-dyyb"
+  },
+  "Q5104": {
+   "b": "Renflexis",
+   "g": "Infliximab-abda"
+  },
+  "Q5105": {
+   "b": "Retacrit (ESRD)",
+   "g": "Epoetin alfa-epbx"
+  },
+  "Q5106": {
+   "b": "Retacrit",
+   "g": "Epoetin alfa-epbx"
+  },
+  "Q5107": {
+   "b": "Mvasi",
+   "g": "Bevacizumab-awwb"
+  },
+  "Q5108": {
+   "b": "Fulphila",
+   "g": "Pegfilgrastim-jmdb"
+  },
+  "Q5109": {
+   "b": "Ixifi",
+   "g": "Infliximab-qbtx"
+  },
+  "Q5110": {
+   "b": "Nivestym",
+   "g": "Filgrastim-aafi"
+  },
+  "Q5111": {
+   "b": "Udenyca",
+   "g": "Pegfilgrastim-cbqv-"
+  },
+  "Q5112": {
+   "b": "Ontruzant",
+   "g": "Trastuzumab-dttb"
+  },
+  "Q5113": {
+   "b": "Herzuma",
+   "g": "Trastuzumab-pkrb"
+  },
+  "Q5114": {
+   "b": "Ogivri",
+   "g": "Trastuzumab-dkst"
+  },
+  "Q5115": {
+   "b": "Truxima",
+   "g": "Rituximab-abbs"
+  },
+  "Q5116": {
+   "b": "Trazimera",
+   "g": "Trastuzumab-qyyp"
+  },
+  "Q5117": {
+   "b": "Kanjinti",
+   "g": "Trastuzumab-anns"
+  },
+  "Q5118": {
+   "b": "Zirabev",
+   "g": "Bevacizumab-bvzr"
+  },
+  "Q5119": {
+   "b": "Ruxience",
+   "g": "Rituximab-pvvr"
+  },
+  "Q5120": {
+   "b": "Ziextenzo",
+   "g": "Pegfilgrastim-bmez"
+  },
+  "Q5121": {
+   "b": "Avsola",
+   "g": "Infliximab-axxq"
+  },
+  "Q5122": {
+   "b": "Nyvepria",
+   "g": "Pegfilgrastim-apgf"
+  },
+  "Q5123": {
+   "b": "Riabni",
+   "g": "Rituximab-arrx"
+  },
+  "Q5124": {
+   "b": "Byooviz",
+   "g": "Ranibizumab-nuna"
+  },
+  "Q5125": {
+   "b": "Releuko",
+   "g": "Filgrastim-ayow"
+  },
+  "Q5126": {
+   "b": "Alymsys",
+   "g": "Bevacizumab-maly"
+  },
+  "Q5127": {
+   "b": "Stimufend",
+   "g": "Pegfilgrastim-fpgk"
+  },
+  "Q5128": {
+   "b": "Cimerli",
+   "g": "Ranibizumab-eqrn"
+  },
+  "Q5129": {
+   "b": "Vegzelma",
+   "g": "Bevacizumab-adcd"
+  },
+  "Q5130": {
+   "b": "Fylnetra",
+   "g": "Pegfilgrastim-pbbk"
+  },
+  "Q5133": {
+   "b": "Tofidence",
+   "g": "Tocilizumab-bavi"
+  },
+  "Q5134": {
+   "b": "Tyruko",
+   "g": "Natalizumab-sztn"
+  },
+  "Q5135": {
+   "b": "Tyenne",
+   "g": "Tocilizumab-aazg"
+  },
+  "Q5136": {
+   "b": "Jubbonti/Wyost",
+   "g": "Denosumab-bbdz"
+  },
+  "Q5138": {
+   "b": "Wezlana",
+   "g": "Ustekinumab-auub"
+  },
+  "Q5140": {
+   "b": "Hulio",
+   "g": "Adalimumab-fkjp"
+  },
+  "Q5141": {
+   "b": "Yuflyma",
+   "g": "Adalimumab-aaty"
+  },
+  "Q5142": {
+   "b": "Simlandi",
+   "g": "Adalimumab-ryvk"
+  },
+  "Q5143": {
+   "b": "Cyltezo",
+   "g": "Adalimumab-adbm"
+  },
+  "Q5144": {
+   "b": "Idacio",
+   "g": "Adalimumab-aacf"
+  },
+  "Q5145": {
+   "b": "Abrilada",
+   "g": "Adalimumab-afzb"
+  },
+  "Q5146": {
+   "b": "Hercessi",
+   "g": "Trastuzumab-strf"
+  },
+  "Q5147": {
+   "b": "Pavblu",
+   "g": "Aflibercept-ayyh"
+  },
+  "Q5148": {
+   "b": "Nypozi",
+   "g": "Filgrastim-txid"
+  },
+  "Q5151": {
+   "b": "Epysqli",
+   "g": "Eculizumab-aagh"
+  },
+  "Q5152": {
+   "b": "Bkemv",
+   "g": "Eculizumab-aeeb"
+  },
+  "Q5153": {
+   "b": "Opuviz",
+   "g": "Aflibercept-yszy"
+  },
+  "Q5156": {
+   "b": "Avtozma",
+   "g": "Tocilizumab-anoh"
+  },
+  "Q5157": {
+   "b": "Stoboclo/Osenvelt",
+   "g": "Denosumab-bmwo"
+  },
+  "Q5158": {
+   "b": "Bomyntra/Conexxence",
+   "g": "Denosumab-bnht"
+  },
+  "Q5160": {
+   "b": "Jobevne",
+   "g": "Bevacizumab-nwgd"
+  },
+  "Q5161": {
+   "b": "Aukelso/Bosaya",
+   "g": "Denosumab-kyqq"
+  },
+  "Q5162": {
+   "b": "Bildyos/Bilprevda",
+   "g": "Denosumab-nxxp"
+  }
+ },
+ "OVR": {
+  "eylea": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "pavblu": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "prolia": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "xgeva": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "stoboclo": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "osenvelt": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "jubbonti": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "wyost": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "bildyos": {
+   "mcr": "Y",
+   "mcd": "N"
+  },
+  "bilprevda": {
+   "mcr": "Y",
+   "mcd": "N"
+  },
+  "biprevda": {
+   "mcr": "Y",
+   "mcd": "N"
+  },
+  "actemra": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "tyenne": {
+   "mcr": "Y",
+   "mcd": "Y"
+  },
+  "tofidence": {
+   "mcr": "Y",
+   "mcd": "N"
+  }
+ }
+}
