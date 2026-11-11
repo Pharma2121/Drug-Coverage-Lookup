@@ -1,0 +1,9 @@
+# Source data is large and not needed to run the page. See sources/README.md for what to download.
+sources/*
+!sources/README.md
+!sources/build_meta.json
+!sources/carry_forward.json
+build/out/
+build/artifact_page.html
+__pycache__/
+.DS_Store
