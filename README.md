@@ -56,7 +56,9 @@ data is embedded and unpacked in the browser, so it also works offline once down
   or its HCPCS code has a Part B payment limit. NY Medicaid eligible: the product is in the NYRx pharmacy
   file, or its code is on the state physician-administered drug list or fee schedule. "Not confirmed"
   means the code exists but has no Part B payment limit, which CMS says is not a coverage decision. An
-  unclassified code (J3490, J3590, J9999) counts only when the state list names the product under it.
+  unclassified code (J3490, J3590, J9999) never has a payment limit, so a pharmacy product that carries
+  only such a code and that no drug plan in view lists is shown as "No". On the NY list an unclassified
+  code counts, because the build checks that the list names every product carrying one.
   Eligible is not approved: prior authorization and plan rules still apply, and a Medicaid managed care
   plan can cover a drug the fee-for-service lists do not.
 - **Biosimilars come from the CMS code descriptors.** A code is labelled "biosimilar" when its CMS HCPCS
