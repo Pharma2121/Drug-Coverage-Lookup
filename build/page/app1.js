@@ -60,6 +60,7 @@ async function boot() {
     D = G.D; RX = G.RX; CL = G.CL;
     RX.forEach((r, i) => { RXI[r] = i; });
     DL = RX.map(r => { const d = D[r]; d.r = r; const pb = d.h && G.PAYB[d.h]; if (pb) { d.p = pb.p; d.c = pb.c; } return d; });
+    indexIngredients();
     const sf = $('sf'); G.STATES.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sf.appendChild(o); });
     const mf = $('mf'); MT_TYPES.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; mf.appendChild(o); });
     renderSources();

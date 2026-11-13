@@ -56,13 +56,15 @@ function rankDrugs(q, limit) {
   out.sort((a, b) => b.score - a.score || (b.br ? 1 : 0) - (a.br ? 1 : 0) || a.key.length - b.key.length || a.key.localeCompare(b.key));
   return limit ? out.slice(0, limit) : out;
 }
+function molScore(q, qt, e) { const s = e.m ? scoreText(q, qt, e.m, 540) : 0; return s && !e.bio ? s + 5 : s; }   // a molecule query lists the reference product first, then its biosimilars
 function rankPBD(q, limit) {
   const qn = nrm(q), qt = toks(q); if (!qn) return [];
   const out = [];
   for (const code in G.PBD) {
     const e = G.PBD[code]; let s = 0;
     if (nrm(code) === qn.replace(/\s+/g, '')) s = 1200;
-    else s = Math.max(scoreText(qn, qt, e.n, 600), scoreText(qn, qt, e.sd, 300), e.alt ? scoreText(qn, qt, e.alt.join(' '), 250) : 0);
+    else s = Math.max(scoreText(qn, qt, e.n, 600), scoreText(qn, qt, e.sd, 300), e.alt ? scoreText(qn, qt, e.alt.join(' '), 250) : 0,
+      e.g ? scoreText(qn, qt, e.g, 520) : 0, molScore(qn, qt, e));
     if (s) out.push({ code, e, score: s });
   }
   out.sort((a, b) => b.score - a.score || a.e.n.localeCompare(b.e.n));
@@ -73,10 +75,53 @@ function biosimHits(q, taken) {
   for (const code in G.BIOSIM) { const b = G.BIOSIM[code]; if (!G.PBD[code] && fuzzyMatch(q, b.b || '', b.g || '', code) && !taken[b.b || b.g || code]) out.push({ code, b: b.b, g: b.g }); }
   return out;
 }
+// ---------- same-ingredient index ----------
+// ING[ingredient][group key] = { h: the group's HCPCS code, sufs: suffixed names in the group such as "adalimumab-adaz", plain: products without one }
+// MOLC[ingredient] = HCPCS codes for that molecule (reference product and biosimilars), set at build time by biosimilars.py.
+let ING = {}, MOLC = {}, MEDN = {}, BRAND = {};
+function indexIngredients() {
+  for (const d of DL) {
+    if (d.b) BRAND[d.b] = 1;
+    if (!d.g) continue;
+    const grp = ING[d.g] || (ING[d.g] = {}), k = dkey(d), it = grp[k] || (grp[k] = { h: '', sufs: [], plain: 0 });
+    if (d.h && !it.h) it.h = d.h;
+    const i = (d.d || '').indexOf(d.g + '-'), m = i >= 0 && /^-[A-Z]{4}\b/.exec(d.d.slice(i + d.g.length)), suf = m ? (d.g + m[0]).toLowerCase() : '';
+    if (!suf) it.plain++; else if (!it.sufs.includes(suf)) it.sufs.push(suf);
+  }
+  for (const code in G.PBD) {
+    const e = G.PBD[code]; MEDN[e.n] = (MEDN[e.n] || 0) + 1;
+    if (e.m) { const g = e.m.toUpperCase(); (MOLC[g] = MOLC[g] || []).push(code); }
+  }
+}
+// The code a selection's coverage summary shows is the first one among its products; a medical-benefit entry for that code would repeat it.
+function shownCodes(lists) { const s = new Set(); lists.forEach(items => { const d = items.find(x => x && x.h); if (d) s.add(d.h); }); return s; }
+// Two codes can share a brand (Wezlana SC and IV), and a brand can be both a Part D product and a medical code: those get the code in the name.
+function medName(code) { const n = G.PBD[code].n || code; return MEDN[n] > 1 || BRAND[n] ? n + ' (' + code + ')' : n; }
+function medSub(code, e) {
+  if (G.NOTPAYB[code]) return 'Medical benefit · not payable under Part B';
+  return (e.bio ? 'Biosimilar' + (e.g ? ' · ' + e.g : '') + ' · medical benefit' : 'Medical benefit · ' + (e.sd || '')) + (e.bio && e.alt && e.alt.length ? ' · also ' + e.alt.join(', ') : '') + (e.end ? ' · code ended ' + e.end : '');
+}
 function medRx(code) {                         // a medical-benefit-only product gets a synthetic id
   const id = 'PB_' + code, e = G.PBD[code];
-  if (!D[id]) { const pb = G.PAYB[code] || {}; D[id] = { r: id, b: e.n || '', d: e.sd || '', s: e.do || '', f: 'MEDICAL BENEFIT', g: '', h: code, p: pb.p || '', c: pb.c || '', mb: 1 }; }
+  if (!D[id]) { const pb = G.PAYB[code] || {}; D[id] = { r: id, b: medName(code), n0: e.n || '', d: e.ld || e.sd || '', s: e.do || '', f: 'MEDICAL BENEFIT', g: (e.m || '').toUpperCase(), h: code, p: pb.p || '', c: pb.c || '', mb: 1 }; }
   return id;
+}
+function sameIng(ds) {                         // every product sharing the active ingredient: Part D groups, then medical codes not already shown by one
+  const g = (ds.find(d => d.g) || {}).g; if (!g) return null;
+  const items = [], shown = new Set(), grp = ING[g] || {};
+  for (const key in grp) {
+    const it = grp[key], e = it.h ? G.PBD[it.h] : null;
+    // a Part D group is labelled biosimilar only when its HCPCS code is one CMS describes as a biosimilar; otherwise it shows its suffixed name
+    const bio = !!(e && e.bio && (e.m || '').toUpperCase() === g);
+    const sub = it.sufs.slice(0, 4).map((x, i) => i ? x.slice(g.length) : x).join(', ') + (it.sufs.length > 4 ? ', …' : '');
+    if (it.h) shown.add(it.h);
+    items.push({ kind: 'drug', key, name: key, code: it.h, bio, sub });
+  }
+  (MOLC[g] || []).forEach(code => { if (shown.has(code)) return; const e = G.PBD[code]; items.push({ kind: 'med', key: code, name: e.n || code, code, bio: !!e.bio, sub: e.g || '' }); });
+  if (items.length < 2) return null;
+  const late = it => (it.bio || it.sub ? 1 : 0);  // originator and unsuffixed products first
+  items.sort((a, b) => late(a) - late(b) || a.name.localeCompare(b.name) || (a.kind === 'drug' ? 0 : 1) - (b.kind === 'drug' ? 0 : 1) || a.key.localeCompare(b.key));
+  return { g, items };
 }
 function bsRx(code) {
   const id = 'BS_' + code, b = G.BIOSIM[code];

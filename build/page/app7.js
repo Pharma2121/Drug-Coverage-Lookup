@@ -59,6 +59,9 @@ document.addEventListener('click', e => {
   if (t.dataset.year) { setYear(t.dataset.year); return; }
   const a = t.dataset.act, k = t.dataset.key;
   if (a === 'drug' || a === 'med' || a === 'bs') addDrug(a, k);
+  else if (a === 'ing') addIng([{ kind: t.dataset.kind, key: k }], true);
+  else if (a === 'ingall') addIng(window._ing || [], false);
+  else if (a === 'covpick') { const sel = $('covSelect'); if (sel && COVB[k]) { sel.value = k; showCov(k); } }
   else if (a === 'plan' || a === 'planq') addPlan(a, k);
   else if (a === 'rem') { ({ d: selDrugs, p: selPlans, s: selStates, m: selMT })[t.dataset.kind].splice(+t.dataset.i, 1); renderTags(); }
   else if (a === 'sort') sortBy(+t.dataset.i);

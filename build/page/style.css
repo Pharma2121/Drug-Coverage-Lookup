@@ -94,6 +94,15 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .cov-part { background: var(--part-bg); color: var(--part-ink); border-color: var(--part-line); }
 .cov-link { background: var(--link-bg); color: var(--link-ink); border-color: var(--link-line); }
 .mut { color: var(--ink-2); font-size: 12px; }
+.ing-name { font-size: 12px; font-weight: 600; color: var(--ink-2); margin-right: 2px; }
+.ing-chip { display: inline-flex; align-items: baseline; gap: 5px; max-width: 100%; padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 12px; font-weight: 600; text-align: left; }
+button.ing-chip { cursor: pointer; }
+button.ing-chip:hover { background: var(--surface-2); border-color: var(--focus); }
+.ing-chip.cur { background: var(--part-bg); border-color: var(--part-line); color: var(--part-ink); }
+.ing-chip .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 30ch; }
+.ing-chip .cd { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--ink-2); white-space: nowrap; }
+.ing-chip .bs { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0 6px; border-radius: 9px; background: var(--link-bg); color: var(--link-ink); white-space: nowrap; }
+.ing-all { border: 0; background: transparent; color: var(--part-ink); font: inherit; font-size: 12px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 3px 4px; }
 .results-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
 table.res { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
 table.res th { background: var(--brand); padding: 0; text-align: left; white-space: nowrap; }
@@ -112,6 +121,17 @@ table.res .nof { color: var(--no-ink); font-weight: 600; }
 .t1 { background: var(--t1-bg); color: var(--t1-ink); } .t2 { background: var(--t2-bg); color: var(--t2-ink); } .t3 { background: var(--t3-bg); color: var(--t3-ink); }
 .t4 { background: var(--t4-bg); color: var(--t4-ink); } .t5 { background: var(--t5-bg); color: var(--t5-ink); } .t6 { background: var(--t6-bg); color: var(--t6-ink); }
 .pill.ok { background: var(--ok-bg); color: var(--ok-ink); } .pill.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.pill.yes { background: var(--ok-bg); color: var(--ok-ink); } .pill.no { background: var(--no-bg); color: var(--no-ink); } .pill.na { background: var(--na-bg); color: var(--na-ink); }
+#covAll:empty { display: none; }
+.elig-wrap { overflow-x: auto; max-width: 100%; }
+table.elig { border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+table.elig th, table.elig td { text-align: left; padding: 4px 18px 4px 0; border-bottom: 1px solid var(--surface-2); vertical-align: baseline; white-space: nowrap; }
+table.elig thead th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-2); }
+table.elig tbody th { font-weight: 600; }
+table.elig tbody th button { all: unset; cursor: pointer; color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 2px; max-width: 34ch; overflow: hidden; text-overflow: ellipsis; display: inline-block; vertical-align: bottom; }
+table.elig tbody th button:hover { text-decoration-color: var(--focus); }
+table.elig tbody th button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+table.elig tr.cur th button { color: var(--part-ink); }
 .pill.type { background: var(--na-bg); color: var(--na-ink); } .pill.neg { background: var(--neg-bg); color: var(--neg-ink); }
 .fy { color: var(--no-ink); font-weight: 600; } .fn { color: var(--ok-ink); }
 .cost-val { font-weight: 600; } .cost-type { font-size: 11px; color: var(--ink-2); }

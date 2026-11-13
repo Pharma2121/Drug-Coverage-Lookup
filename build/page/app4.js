@@ -31,8 +31,9 @@ function search(keep) {
   if (keep !== true) { if (exampleShown && dq.length >= 2) selDrugs = []; exampleShown = false; }
   if (dq.length >= 2) {                                  // typed text adds its best matches to whatever is already selected
     const taken = {}; selDrugs.forEach(s => { taken[s.key] = 1; });
-    rankDrugs(dq, 10).forEach(g => { if (taken[g.key]) return; selDrugs.push({ key: g.key, rxcuis: g.items.map(d => d.r) }); taken[g.key] = 1; });
-    rankPBD(dq, 10).forEach(x => { const nm = x.e.n || x.code; if (taken[nm] || selDrugs.length >= 20) return; selDrugs.push({ key: nm, rxcuis: [medRx(x.code)], mb: 1 }); taken[nm] = 1; });
+    rankDrugs(dq, 15).forEach(g => { if (taken[g.key]) return; selDrugs.push({ key: g.key, rxcuis: g.items.map(d => d.r) }); taken[g.key] = 1; });
+    const shown = shownCodes(selDrugs.map(s => s.rxcuis.map(r => D[r])));
+    rankPBD(dq, 20).forEach(x => { const nm = medName(x.code); if (taken[nm] || shown.has(x.code) || selDrugs.length >= 30) return; selDrugs.push({ key: nm, rxcuis: [medRx(x.code)], mb: 1 }); taken[nm] = 1; });
     biosimHits(dq, taken).forEach(b => { const nm = b.b || b.g || b.code; if (taken[nm] || selDrugs.length >= 20) return; selDrugs.push({ key: nm, rxcuis: [bsRx(b.code)], bs: 1 }); taken[nm] = 1; });
   }
   if (pq.length >= 2 && !selPlans.find(s => s.key === pq) && Y.P.some(p => fuzzyMatch(pq, p.pn || '', p.cn || '', p.cid || ''))) selPlans.push({ key: pq, q: true });
@@ -73,7 +74,7 @@ function search(keep) {
     allRx.forEach(rx => { const k = dkey(D[rx]); (COVB[k] = COVB[k] || []).push(rx); });
     const keys = Object.keys(COVB);                       // best match first
     $('covpanel').innerHTML = '<div class="cov-panel"><div class="cov-head"><h2>Coverage summary</h2><label class="sr" for="covSelect">Product</label><select id="covSelect">' +
-      keys.map(k => '<option value="' + esc(k) + '">' + esc(k) + '</option>').join('') + '</select><span class="cov-pool" id="covPool"></span></div><div id="covBadges"></div></div>';
+      keys.map(k => '<option value="' + esc(k) + '">' + esc(k) + '</option>').join('') + '</select><span class="cov-pool" id="covPool"></span></div><div id="covBadges"></div><div id="covAll"></div></div>';
     window._pool = pool;
     showCov(keys[0]);
   } else $('covpanel').innerHTML = '';

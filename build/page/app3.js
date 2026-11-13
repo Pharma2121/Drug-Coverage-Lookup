@@ -4,7 +4,8 @@ function drugKey() {
   const q = $('di').value.trim(), dd = $('dd');
   if (q.length < 2) { dd.classList.remove('show'); return; }
   const ranked = rankDrugs(q, 40), taken = {}; ranked.forEach(g => { taken[g.key] = 1; });
-  const mb = rankPBD(q, 25).filter(x => !taken[x.e.n]), bs = biosimHits(q, taken);
+  const shown = shownCodes(ranked.map(g => g.items));
+  const mb = rankPBD(q, 30).filter(x => !shown.has(x.code)), bs = biosimHits(q, taken);
   if (!ranked.length && !mb.length && !bs.length) { dd.innerHTML = '<div class="ml-note">No matches</div>'; dd.classList.add('show'); return; }
   let h = '';
   if (ranked.some(g => g.fuzzy)) h += '<div class="ml-note warn">No exact match. Closest spellings:</div>';
@@ -14,7 +15,7 @@ function drugKey() {
       ' <span class="cnt">(' + g.items.length + ')</span></div><div class="sub">' + esc(ex.s || '') + ' · ' + esc(ex.f || '') + (ex.h ? ' · ' + esc(ex.h) : '') + '</div></div>';
   }).join('');
   h += mb.map(x => '<div class="ml-item" data-act="med" data-key="' + esc(x.code) + '"><div class="main">' + esc(x.e.n) + ' <span class="cnt">(' + esc(x.code) + ')</span></div><div class="sub med">' +
-    (G.NOTPAYB[x.code] ? 'Medical benefit · not payable under Part B' : 'Medical benefit · ' + esc(x.e.sd || '')) + '</div></div>').join('');
+    esc(medSub(x.code, x.e)) + '</div></div>').join('');
   h += bs.slice(0, 10).map(b => '<div class="ml-item" data-act="bs" data-key="' + esc(b.code) + '"><div class="main">' + esc(b.b || b.g || b.code) + ' <span class="cnt">(' + esc(b.code) + ')</span></div><div class="sub med">Biosimilar · ' + esc(b.g || '') + '</div></div>').join('');
   dd.innerHTML = h; dd.classList.add('show');
 }
@@ -38,10 +39,23 @@ function addDrug(act, key) {
   if (exampleShown) { selDrugs = []; exampleShown = false; }
   let sel;
   if (act === 'drug') sel = { key, rxcuis: DL.filter(d => dkey(d) === key).map(d => d.r) };
-  else if (act === 'med') sel = { key: G.PBD[key].n || key, rxcuis: [medRx(key)], mb: 1 };
+  else if (act === 'med') sel = { key: medName(key), rxcuis: [medRx(key)], mb: 1 };
   else { const b = G.BIOSIM[key]; sel = { key: b.b || b.g || key, rxcuis: [bsRx(key)], bs: 1 }; }
   if (!selDrugs.find(s => s.key === sel.key)) selDrugs.push(sel);
   renderTags();
+}
+function addIng(items, focus) {               // from the "Same ingredient" row: add products to the comparison and keep what is selected
+  exampleShown = false;
+  const was = $('covSelect') ? $('covSelect').value : '';
+  let last = '';
+  items.slice(0, 40).forEach(it => {
+    const key = it.kind === 'drug' ? it.key : medName(it.key);
+    if (!selDrugs.find(s => s.key === key)) selDrugs.push(it.kind === 'drug' ? { key, rxcuis: DL.filter(d => dkey(d) === key).map(d => d.r) } : { key, rxcuis: [medRx(it.key)], mb: 1 });
+    last = key;
+  });
+  renderTags(); search(true);
+  const want = focus ? last : was, sel = $('covSelect');
+  if (sel && want && COVB[want]) { sel.value = want; showCov(want); }
 }
 function addPlan(act, key) {
   $('pd').classList.remove('show'); $('pi').value = '';
@@ -50,7 +64,7 @@ function addPlan(act, key) {
 }
 function renderTags() {
   const tag = (cls, label, kind, i) => '<span class="tag ' + cls + '">' + esc(label) + ' <button type="button" class="x" data-act="rem" data-kind="' + kind + '" data-i="' + i + '" aria-label="Remove ' + esc(label) + '">×</button></span>';
-  $('dt').innerHTML = selDrugs.map((s, i) => tag('tag-drug', s.key + ' (' + s.rxcuis.length + ')', 'd', i)).join('');
+  $('dt').innerHTML = selDrugs.map((s, i) => tag('tag-drug', s.mb ? s.key : s.key + ' (' + s.rxcuis.length + ')', 'd', i)).join('');
   $('pt').innerHTML = selPlans.map((s, i) => tag('tag-plan', s.key + ' (' + planMatches(s).length + ')', 'p', i)).join('');
   $('stags').innerHTML = selStates.map((s, i) => tag('tag-state', s, 's', i)).join('');
   $('mtags').innerHTML = selMT.map((s, i) => tag('tag-drug', s, 'm', i)).join('');
