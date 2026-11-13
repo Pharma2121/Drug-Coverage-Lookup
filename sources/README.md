@@ -22,3 +22,17 @@ file-name patterns.
 `build_meta.json` holds the release dates shown in the page. `carry_forward.json` holds a small set of
 curated values: names for a few drugs CMS no longer lists, labels for biosimilar codes, and hand-verified
 coverage notes.
+
+## Kept in the repository
+
+`hcpcs_biosimilar_codes.csv` is small and is the only source stored here. It holds the CMS HCPCS Level II
+long descriptor, start date and end date for every code in the biosimilar range (Q5098 and up), for example
+`Q5128, "Injection, ranibizumab-eqrn (cimerli), biosimilar, 0.1 mg", 20230401`. `build/biosimilars.py` reads
+the biosimilar's name, molecule and brands from it.
+
+Refresh it each quarter, when CMS issues new codes (January, April, July, October). The rows come from the
+CMS Alpha-Numeric HCPCS file (cms.gov, HCPCS Quarterly Update). The same rows can be read from the National
+Library of Medicine's copy of that file:
+`https://clinicaltables.nlm.nih.gov/api/hcpcs/v3/search?terms=Q5&maxList=500&df=code,long_desc,add_dt,term_dt&sf=code`.
+Keep the four columns `HCPCS, LONG_DESCRIPTION, ADD_DATE, TERM_DATE`, and update `hcpcs_asof` in
+`build_meta.json`. The build prints any code whose name disagrees with the NY Medicaid lists.

@@ -9,6 +9,7 @@
   },
   "frf": "CY2026 file dated 10/26/2026; CY2027 file dated 9/15/2026",
   "crosswalk": "October 2026",
+  "hcpcs_asof": "codes through Q5173 (effective 10/1/2026), retrieved 11/12/2026",
   "mp_form_note": "11/1/2026 list, used for both plan years (no 2027 list was posted at build time)",
   "hf_form": {"hf26": "November 2026 list", "hf27": "January 2027 list"}
 }
