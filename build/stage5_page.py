@@ -1,12 +1,20 @@
 """Stage 5 - assemble the page.
 
-Inputs  : out/partd.json, out/drugs.json, out/medical.json, out/plans.json, sources/build_meta.json, build/page/*
+Inputs  : out/partd.json, out/drugs.json, out/medical.json, out/plans.json, sources/build_meta.json,
+          sources/hcpcs_biosimilar_codes.csv (see biosimilars.py), build/page/*
 Outputs : ../index.html                 single self-contained file (open it directly in a browser)
           out/artifact_page.html        same page without the document skeleton, for publishing as a claude.ai artifact
 Data is embedded as gzip + base64 blobs and unpacked in the browser with DecompressionStream; the year blobs load on demand.
 """
 import gzip, base64, datetime
 from common import *
+from biosimilars import load_hcpcs, enrich, print_report
+
+def hcpcs_source(meta):
+    return ['Biosimilars: HCPCS code, biosimilar name, molecule and code dates', 'CMS HCPCS Level II code descriptors, biosimilar range Q5098 and up', meta['hcpcs_asof']]
+
+def build_date():
+    return os.environ.get('LOOKUP_BUILD_DATE') or datetime.date.today().strftime('%B %-d, %Y')
 
 def blob(obj):
     raw = json.dumps(obj, separators=(',', ':'), ensure_ascii=False).encode('utf-8')
@@ -32,6 +40,7 @@ def main():
         ['Dollar estimates for coinsurance', 'CMS quarterly pricing file: median 30-day unit cost across all plans', 'Q3 2026'],
         ['Medicare Part B payment limits and drugs not payable', 'CMS Medicare Part B Payment Limit File; Drugs Not Payable Under Part B', mm['partb_eff']],
         ['HCPCS code for a Part D drug', 'CMS ASP, AWP, OPPS and PrEP NDC-HCPCS crosswalks; NYS PAD list', meta['crosswalk']],
+        hcpcs_source(meta),
         ['NY Medicaid pharmacy benefit (NYRx): preferred, non-preferred, covered, PA', 'eMedNY List of Medicaid Reimbursable Drugs', meta['nyrx_date']],
         ['NY Medicaid medical benefit: covered codes, PA, manual review', 'NYS DOH List of Physician Administered Drugs', 'effective ' + mm['pad_eff']],
         ['NY Medicaid medical benefit: fallback code list', 'eMedNY Physician Manual Fee Schedule, Section 3 (Drugs)', 'effective ' + mm['nysfs_eff']],
@@ -43,12 +52,16 @@ def main():
     META = {'years': {y: {'label': meta['years'][y]['label']} for y in YEARS}, 'default_year': meta['default_year'], 'example': meta['example'],
             'price_label': meta['price_label'], 'nyrx_date': meta['nyrx_date'], 'partb_eff': mm['partb_eff'], 'pad_eff': mm['pad_eff'], 'nysfs_eff': mm['nysfs_eff'],
             'hf_grid_rev': plans['meta']['hf_grid_rev'], 'mp_grid_upd': plans['meta']['mp_grid_upd'], 'sources': sources,
-            'built': datetime.date.today().strftime('%B %-d, %Y')}
+            'built': build_date()}
     common = {'D': drugs['D'], 'RX': partd['RX'], 'CL': partd['CL'], 'STATES': states, 'DP': drugs['DP'], 'NYMC': drugs['NYMC'], 'NYPA': drugs['NYPA'],
               'PAYB': med['PAYB'], 'NOTPAYB': med['NOTPAYB'], 'PBD': med['PBD'], 'BIOSIM': med['BIOSIM'], 'NYSMED': med['NYSMED'], 'PADN': med['PADN'], 'NYSFS': med['NYSFS'],
               'HFPA': {c: {k: v for k, v in e.items() if k != 'l'} for c, e in plans['HFPA'].items()}, 'MPPA': plans['MPPA'], 'OVR': prev.get('OVR', {}), 'FORM': FORM, 'META': META}
+    write_page(common, {y: partd['Y'][y] for y in YEARS})
+
+def write_page(common, years):
+    print_report(enrich(common, load_hcpcs()))
     blobs = {'common': blob(common)}
-    for y in YEARS: blobs[y] = blob(partd['Y'][y])
+    for y in YEARS: blobs[y] = blob(years[y])
     for k, (b, n) in blobs.items(): print(f'  blob {k}: {n/1e6:.1f} MB json -> {len(b)/1e6:.2f} MB embedded')
 
     page = os.path.join(HERE, 'page')
