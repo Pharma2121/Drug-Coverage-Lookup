@@ -66,7 +66,26 @@ def check_biosimilars(G):
     # the page's "at a glance" answer for a medical-benefit code, re-derived here from the same tables
     noc = lambda c: bool(re.search(r'UNCLASSIFIED|NOT OTHERWISE CLASSIFIED', ((G['NYSMED'].get(c) or {}).get('n', '') + ' ' + (G['NYSFS'].get(c) or {}).get('d', '') + ' ' + PBD[c].get('sd', '')).upper()))
     mcr = lambda c: 'No' if c in G['NOTPAYB'] else 'Yes' if c in G['PAYB'] else 'Not confirmed'
-    mcd = lambda c: 'Yes' if (c in G['NYSMED'] or c in G['NYSFS']) and not noc(c) else 'No'
+    mcd = lambda c: 'Yes' if c in G['NYSMED'] or c in G['NYSFS'] else 'No'
+    # Part D products that carry a catch-all code (J3490, J3590, J9999): the page reads the code's place on the NY list as the product's,
+    # which holds only if the list names each of those products under that code. Names differ in small ways: "HYRIMOZ(CF)", "EGRIFTA SV",
+    # "POLYMYXIN B SULFATE", a kit named after its brand.
+    under = collections.defaultdict(set)
+    for n, cd in G['PADN'].items(): under[cd].add(n)
+    for cd, r in G['NYSMED'].items(): under[cd] |= {n.upper() for n in r.get('d', [])}
+    def named_under(rxs, code):
+        cand = set()
+        for d in rxs:
+            g = (d.get('g') or '').upper()
+            if d.get('b'): cand.add(d['b'].upper())
+            if g:
+                cand.add(g); m = re.search(re.escape(g) + r'-[A-Z]{4}\b', (d.get('d') or '').upper())
+                if m: cand.add(m.group(0))
+        return any(n == c or (n.startswith(c) and n[len(c)] in ' (') or c.startswith(n + ' ') for n in under[code] for c in cand)
+    catch = collections.defaultdict(list)
+    for d in D.values():
+        if d.get('h') and noc(d['h']): catch[(d['b'] or d['g'], d['h'])].append(d)
+    unnamed = sorted({k[0] for k, rxs in catch.items() if not named_under(rxs, k[1])})
     carried = json.load(open(src('carry_forward.json'))).get('BIOSIM', {})
     second = {c for c, g in ny} | {c for c in HC if c in PBD and (carried.get(c) or {}).get('g', '').strip().lower().rstrip('-') == PBD[c].get('g')}
     q5 = [c for c in HC if c in PBD]
@@ -91,6 +110,7 @@ def check_biosimilars(G):
         ('ranibizumab group', sorted(groups['ranibizumab'][0]) + sorted(groups['ranibizumab'][1]), ['J2778', 'J2779', 'Q5124', 'Q5128', 'Q5168']),
         ('Medicare / NY Medicaid eligible: Cimerli, Byooviz, Omlyclo, Lucentis, Xolair', [(mcr(c), mcd(c)) for c in ('Q5128', 'Q5124', 'Q5154', 'J2778', 'J2357')],
          [('Yes', 'Yes'), ('Yes', 'No'), ('Not confirmed', 'No'), ('Yes', 'Yes'), ('Yes', 'Yes')]),
+        ('Part D product groups on an unclassified code / not named under it on the NY list', (len(catch), unnamed), (32, [])),
         ('biosimilar codes by code alone: Medicare yes / not confirmed, NY Medicaid yes / no',
          (sum(mcr(c) == 'Yes' for c in bio), sum(mcr(c) == 'Not confirmed' for c in bio), sum(mcd(c) == 'Yes' for c in bio), sum(mcd(c) == 'No' for c in bio)), (56, 22, 53, 25)),
     ]: check('published: ' + name, got_ == want_, f'{got_}')
