@@ -33,12 +33,12 @@ function elig(k) {
   else mcr = { v: 'No', cls: 'no', via: nb ? 'not payable under Part B' : '',
     why: (nb ? code + ' is on the CMS list of drugs not payable under Part B. ' : '') + (isMed ? '' : 'No Medicare drug plan in view lists it for ' + YEAR + '.') + (!code ? ' No HCPCS code is linked to it.' : !nb ? ' ' + code + ' is an unclassified code with no Part B payment limit.' : '') };
   let ny = null; rxs.forEach(r => { const v = G.NYMC[r]; if (v === 'Y' || (v === 'X' && ny !== 'Y') || (v === 'N' && !ny)) ny = v; });
-  const pad = padLookup(code, k, ds), fs = code && !isNOC(code) ? G.NYSFS[code] : null, med = !!(pad || fs);
+  const pad = padLookup(code, k, ds), fs = code ? G.NYSFS[code] : null, med = !!(pad || fs);
   const mcd = ny || med
     ? { v: 'Yes', cls: 'yes', via: [ny ? 'pharmacy' : '', med ? 'medical' : ''].filter(Boolean).join(' and ') + ' benefit',
         why: [ny ? 'In the NYRx pharmacy file (' + (ny === 'Y' ? 'preferred' : ny === 'N' ? 'non-preferred' : 'covered') + '), ' + G.META.nyrx_date + '.' : '',
               med ? (pad ? pad.code + ' is on the NYS physician-administered drug list, ' + G.META.pad_eff : code + ' is on the NYS physician drug fee schedule, ' + G.META.nysfs_eff) + '.' : ''].filter(Boolean).join(' ') + ' Fee-for-service; prior authorization may still apply.' }
-    : { v: 'No', cls: 'no', via: '', why: 'Not in the NYRx pharmacy file' + (!code ? ', and no HCPCS code is linked to it.' : isNOC(code) ? ', and the state list does not name it under the unclassified code ' + code + '.' : ', and ' + code + ' is not on the physician-administered drug list or the fee schedule.') + ' A Medicaid managed care plan may still cover it under its own rules.' };
+    : { v: 'No', cls: 'no', via: '', why: 'Not in the NYRx pharmacy file' + (!code ? ', and no HCPCS code is linked to it.' : ', and ' + code + ' is not on the physician-administered drug list or the fee schedule.') + ' A Medicaid managed care plan may still cover it under its own rules.' };
   // values typed in by hand in an earlier build, kept as a cross-check and shown only against the product they name
   let hand = null; [k].concat(ds.map(d => d.b || '')).forEach(n => { const v = G.OVR[(n || '').toLowerCase().trim()]; if (v && !hand) hand = v; });
   return { mcr, mcd, code, hand };
@@ -101,14 +101,13 @@ function showCov(k) {
   else h += badge('cov-no', 'NY Medicaid: not in NYRx file', nyTip + ' This product\'s NDC was not found; another labeler\'s version may be reimbursable.');
 
   // NY Medicaid medical benefit: PAD list first, then the Physician Drug Fee Schedule
-  const pad = padLookup(code, k, ds), fs = code && !isNOC(code) ? G.NYSFS[code] : null;
+  const pad = padLookup(code, k, ds), fs = code ? G.NYSFS[code] : null;
   if (pad || fs) {
     const pr = pad ? pad.rec : null, pcode = pad ? pad.code : code;
     const srcTxt = (pad ? 'NYS List of Physician Administered Drugs, ' + M.pad_eff : 'NYS Physician Drug Fee Schedule, effective ' + M.nysfs_eff) + (fs && fs.br ? '; priced By Report' : '') + '. ' + (pr ? pr.n : fs.d);
     const pa = (pr && pr.pa) || (fs && fs.pa), mr = pr && pr.mr;
     h += badge(pa || mr ? 'cov-warn' : 'cov-yes', 'NY Medicaid medical: ' + esc(pcode) + (pa ? ' · PA required' : mr ? ' · manual review' : ' · covered'), srcTxt);
-  } else if (code && isNOC(code)) h += badge('cov-na', 'NY Medicaid medical: not named under ' + esc(code), code + ' is an unclassified code. The PAD list (' + M.pad_eff + ') names the products it accepts under that code, and this one is not among them.');
-  else if (code) h += badge('cov-no', 'NY Medicaid medical: ' + esc(code) + ' not listed', 'Not on the PAD list (' + M.pad_eff + ') or the Physician Drug Fee Schedule (' + M.nysfs_eff + ').');
+  } else if (code) h += badge('cov-no', 'NY Medicaid medical: ' + esc(code) + ' not listed', 'Not on the PAD list (' + M.pad_eff + ') or the Physician Drug Fee Schedule (' + M.nysfs_eff + ').');
   const key = code || ds[0].b || ds[0].g || k;
   h += badge('cov-link', 'Coverage DB: ' + esc(key) + ' ↗', 'Open the CMS Medicare Coverage Database (LCDs and billing articles) for ' + key, mcdUrl(key));
   h += '</div></div>';

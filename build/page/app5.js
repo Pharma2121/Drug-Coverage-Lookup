@@ -13,13 +13,14 @@ function flagTxt(f) {
 function mcdUrl(kw) {
   return 'https://www.cms.gov/medicare-coverage-database/search.aspx?keyword=' + encodeURIComponent(kw) + '&keywordType=starts&areaId=all&docType=NCA,CAL,NCD,MEDCAC,TA,MCD,6,3,5,1,F,P&contractOption=all&sortBy=relevance&bc=1';
 }
-// J3490, J3590, J9999 and the like are catch-all codes. Being on a list under one says nothing about a product unless the list names that product.
+// J3490, J3590, J9999 and the like are catch-all codes: they never have a Part B payment limit. On the NY list the build checks that every
+// Part D product carrying one is named under it (verify_build.py), so the code's listing is read as the product's listing.
 function isNOC(code) {
   const t = ((G.NYSMED[code] || {}).n || '') + ' ' + ((G.NYSFS[code] || {}).d || '') + ' ' + ((G.PBD[code] || {}).sd || '');
   return /UNCLASSIFIED|NOT OTHERWISE CLASSIFIED/i.test(t);
 }
 function padLookup(code, bn, ds) {
-  if (code && G.NYSMED[code] && !isNOC(code)) return { code, rec: G.NYSMED[code] };
+  if (code && G.NYSMED[code]) return { code, rec: G.NYSMED[code] };
   const cand = [(bn || '').toUpperCase().trim()];
   ds.forEach(d => [d.n0, d.b, d.d].forEach(v => { if (!v) return; v = v.toUpperCase().trim(); cand.push(v, v.replace(/\s+\d.*$/, '').trim()); }));
   for (const c of cand) { const cd = G.PADN[c]; if (cd && G.NYSMED[cd]) return { code: cd, rec: G.NYSMED[cd] }; }
