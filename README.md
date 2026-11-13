@@ -17,6 +17,13 @@ data is embedded and unpacked in the browser, so it also works offline once down
 - **NY Medicaid medical benefit:** physician-administered drug coverage, PA and manual review.
 - **Healthfirst and MetroPlus:** Medicare formularies, marketplace and Essential Plan drug lists, and
   medical-benefit prior authorization and preferred products.
+- **Eligibility at a glance:** each product gets a one-line answer, "Medicare eligible" and "NY Medicaid
+  eligible", as yes, no or not confirmed. With several products selected, a table lists the answer for all
+  of them side by side.
+- **Biosimilars and other products with the same ingredient:** every biosimilar HCPCS code CMS has issued
+  is searchable by brand, by its own name (ranibizumab-eqrn) and by molecule (ranibizumab). The coverage
+  summary has a "Same ingredient" row that lists the reference product and its biosimilars; select one to
+  add it to the comparison.
 
 ## Data sources
 
@@ -28,6 +35,7 @@ data is embedded and unpacked in the browser, so it also works offline once down
 | Coinsurance dollar estimates | CMS quarterly pricing file, median unit cost across plans | Q3 2026 |
 | Medicare Part B | CMS Medicare Part B Payment Limit File | 10/1/2026 to 12/31/2026 |
 | HCPCS for a Part D drug | CMS ASP, AWP, OPPS and PrEP NDC-HCPCS crosswalks; NYS PAD list | October 2026 |
+| Biosimilar codes, names and molecules | CMS HCPCS Level II code descriptors, Q5098 and up | codes through Q5173, effective 10/1/2026 |
 | NY Medicaid pharmacy (NYRx) | eMedNY List of Medicaid Reimbursable Drugs | 11/11/2026 |
 | NY Medicaid medical benefit | NYS DOH List of Physician Administered Drugs; Physician Drug Fee Schedule | 11/11/2026; 10/1/2026 |
 | Healthfirst Leaf / Essential Plan | Healthfirst Comprehensive Drug List | November 2026 and January 2027 lists |
@@ -44,6 +52,21 @@ data is embedded and unpacked in the browser, so it also works offline once down
   data. Entries are matched to drugs by ingredient or brand, then dose form and strength. A badge reading
   "closest listing" means the drug is on the list but not in exactly that form or strength. Confirm in the
   plan's own document.
+- **What "eligible" means.** Medicare eligible: a Medicare drug plan in view lists the product (Part D),
+  or its HCPCS code has a Part B payment limit. NY Medicaid eligible: the product is in the NYRx pharmacy
+  file, or its code is on the state physician-administered drug list or fee schedule. "Not confirmed"
+  means the code exists but has no Part B payment limit, which CMS says is not a coverage decision. An
+  unclassified code (J3490, J3590, J9999) counts only when the state list names the product under it.
+  Eligible is not approved: prior authorization and plan rules still apply, and a Medicaid managed care
+  plan can cover a drug the fee-for-service lists do not.
+- **Biosimilars come from the CMS code descriptors.** A code is labelled "biosimilar" when its CMS HCPCS
+  descriptor says so (71 codes), or when a temporary Q-code outside the Q5 range carries the suffixed name
+  of one of those molecules (7 codes, listed by the build). A biosimilar code appears even before it has a
+  Part B payment limit, so a plan's prior-authorization rule for it can be looked up. The Part D files do
+  not flag biosimilars, so a pharmacy-benefit product shows its suffixed name (adalimumab-adaz) and gets the
+  label only when its HCPCS code is a biosimilar code. A reference product is matched to its biosimilars by
+  finding the molecule as a whole word in the code's official description; conjugates and combinations
+  (ado-trastuzumab emtansine, ziv-aflibercept, pertuzumab with trastuzumab) are kept out.
 - Absence from the Part B Payment Limit File is not a coverage determination. The local Medicare
   contractor decides.
 - NYRx applies to mainstream Medicaid managed care, HARP and HIV-SNP. It does not apply to Essential Plan,
@@ -60,7 +83,9 @@ pip install pymupdf xlrd
 sh build/build_all.sh
 ```
 
-That runs five build stages and then the reconciliation checks.
+That runs five build stages and then the reconciliation checks. The biosimilar checks need only the
+page and the small file kept in `sources/`, so they also run on their own:
+`python3 build/verify_build.py --biosimilars`.
 
 ## Disclaimer
 

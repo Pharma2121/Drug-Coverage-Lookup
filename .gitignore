@@ -3,6 +3,7 @@ sources/*
 !sources/README.md
 !sources/build_meta.json
 !sources/carry_forward.json
+!sources/hcpcs_biosimilar_codes.csv
 build/out/
 build/artifact_page.html
 __pycache__/
